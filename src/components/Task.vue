@@ -25,7 +25,9 @@
                 .task-item__main-info
                   span.ui-label.ui-label--light {{ task.whatWatch }}
                   span Total Time: {{ task.time }}
-                span.button-close
+                span.button-close(
+                  @click="deleteTask(task.id)"
+                )
               .task-item__content
                 .task-item__header
                   .ui-checkbox-wrapper
@@ -44,6 +46,34 @@
                     )
                       .ui-tag
                         span.tag-title {{ tag.title }}
+                    .button-list
+                      .button.button--round.button-default(
+                        @click="taskEdit(task.id, task.title, task.description)"
+                      ) Edit
+                      .button.button--round.button-primary Done
+
+    .ui-messageBox__wrapper(
+      v-if="editing"
+      :class="{active: editing}"
+    )
+      .ui-messageBox.fadeInDown
+        .ui-messageBox__header
+          span.messageBox-title {{ titleEditing }}
+          span.button-close(@click="cancelTaskEdit")
+        .ui-messageBox__content
+          p Title
+          input(
+            type="text"
+            v-model='titleEditing'
+          )
+          p Description
+          textarea(
+            type="text"
+            v-model='desrEditing'
+          )
+        .ui-messageBox__footer
+          .button.button-light(@click="cancelTaskEdit") Cansel
+          .button.button-primary(@click="finishTaskEdit") OK
 
 </template>
 
@@ -51,7 +81,40 @@
 export default {
   data () {
     return {
-      filter: 'active'
+      filter: 'active',
+      editing: false,
+      titleEditing: '',
+      desrEditing: '',
+      taskId: null
+    }
+  },
+  methods: {
+    taskEdit (id, title, description) {
+      this.editing = !this.editing
+      this.taskId = id
+      this.titleEditing = title
+      this.desrEditing = description
+    },
+    cancelTaskEdit () {
+      this.editing = !this.editing
+      this.taskId = null
+      this.titleEditing = ''
+      this.desrEditing = ''
+    },
+    finishTaskEdit () {
+      this.$store.dispatch('editTask', {
+        id: this.taskId,
+        title: this.titleEditing,
+        description: this.desrEditing
+      })
+      this.editing = !this.editing
+    },
+    deleteTask (id) {
+      this.$store.dispatch('deleteTask', id)
+        .then(() => {
+          console.log('task deleted')
+          this.$store.dispatch('loadTasks')
+        })
     }
   },
   computed: {
@@ -113,6 +176,28 @@ export default {
   .ui-checkbox-wrapper
     margin-right 8px
   .ui-title-3
-    margin-bottom 0
+    margin-bottom 6px
+
+.task-item__body
+  margin-bottom 20px
+
+.tag-list
+  margin-bottom 20px
+
+.task-item__foter
+  .button-list
+    text-align right
+
+.button-list
+  .button
+    margin-right 12px
+    &:last-child
+      margin-right 0
+
+.ui-messageBox__wrapper
+  &.active
+    display flex
+  .button-light
+    margin-right 8px
 
 </style>
