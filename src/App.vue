@@ -6,7 +6,7 @@
           .navbar-content
             router-link.header-logo(
               to="/"
-            ) dreamList
+            ) Munia
             .button-burger(
               @click="menuShow = !menuShow"
               :class="{ active: menuShow }"
@@ -30,7 +30,7 @@
                   v-if="checkUser"
                   @click="logout"
                 )
-                  span.navbar-link Logout
+                  span.navbar-link Выход
 
       router-view
 </template>
@@ -55,13 +55,13 @@ export default {
     linkMenu () {
       if (this.checkUser) {
         return [
-          {title: 'Home', url: '/'},
-          {title: 'Tasks', url: '/task'}
+          {title: 'Добавить', url: '/'},
+          {title: 'Список', url: '/task'}
         ]
       }
       return [
-        {title: 'Login', url: '/login'},
-        {title: 'Registration', url: '/registration'}
+        {title: 'Войти', url: '/login'},
+        {title: 'Регистрация', url: '/registration'}
       ]
     }
   }
@@ -69,5 +69,22 @@ export default {
 </script>
 
 <style lang="stylus">
-// @import './assets/stylus/main.styl'
+
+.wrapper
+  max-width 100%
+
+.navbar
+  background rgb(0,120,215)
+
+.header-logo
+  color rgb(255,255,255)
+
+.navbar-link
+  color rgba(0,0,161,1)
+
+.line.line-1,
+.line.line-2,
+.line.line-3
+  color rgba(0,0,161,1)
+
 </style>

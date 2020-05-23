@@ -2,81 +2,25 @@
   .content-wrapper
     section
       .container
-        h1.ui-title-1 Home
         input(
           type="text"
-          placeholder="What we will watch?"
+          placeholder="Заголовок"
           v-model="taskTitle"
           @keyup.enter="newTask"
         )
         textarea(
           type="text"
+          placeholder="Описание"
           v-model="taskDescription"
           @keyup.enter="newTask"
         )
-        .option-list
-          input.what-watch--radio(
-            type="radio"
-            id="radioFilm"
-            value="Film"
-            v-model="whatWatch"
-          )
-          label(
-            for="radioFilm"
-          ) Film
-          input.what-watch--radio(
-            type="radio"
-            id="radioSerial"
-            value="Serial"
-            v-model="whatWatch"
-          )
-          label(
-            for="radioSerial"
-          ) Serial
-        .total-time
-          .total-time__film(
-            v-if="whatWatch === 'Film'"
-          )
-            span.time-title Hours
-            input.time-input(
-              type="number"
-              v-model="filmHours"
-            )
-            span.time-title Minutes
-            input.time-input(
-              type="number"
-              v-model="filmMinutes"
-            )
-
-            p {{ filmTime }}
-
-          .total-time__serial(
-            v-if="whatWatch === 'Serial'"
-          )
-            span.time-title How many season?
-            input.time-input(
-              type="number"
-              v-model="serialSeason"
-            )
-            span.time-title How many series?
-            input.time-input(
-              type="number"
-              v-model="serialSeries"
-            )
-            span.time-title How long is one series? (Minutes)
-            input.time-input(
-              type="number"
-              v-model="serialSeriesMinutes"
-            )
-
-            p {{ serialTime }}
 
         .tag-list.tag-list--add
           .ui-tag__wrapper(
             @click="tagMenuShow = !tagMenuShow"
           )
             .ui-tag
-              span.tag-title Add New
+              span.tag-title Создать тег
               span.button-close(
                 :class="{ active: !tagMenuShow }"
               )
@@ -86,13 +30,13 @@
         )
           input.tag-add--input(
             type="text"
-            placeholder="New tag"
+            placeholder="Новый тег"
             v-model="tagTitle"
             @keyup.enter="newTag"
           )
           .button.button-default(
             @click="newTag"
-          ) Send
+          ) Создать
 
         .tag-list
           .ui-tag__wrapper(
@@ -109,7 +53,7 @@
         .button-list
           .button.button--round.button-primary(
             @click="newTask"
-          ) Send
+          ) Создать
 
 </template>
 
@@ -275,5 +219,8 @@ export default {
 .button-list
   display flex
   justify-content flex-end
+
+.button.button--round.button.button--round
+  background rgb(0,120,215)
 
 </style>

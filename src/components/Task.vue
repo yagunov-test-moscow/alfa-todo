@@ -3,17 +3,17 @@
     section
       .container
         .task-list__header
-          h1.ui-title-1 Tasks
+          h1.ui-title-1 Задачи
           .button-list
             .button.button--round.button-default(
               @click="filter = 'active'"
-            ) Active
+            ) Активные
             .button.button--round.button-default(
               @click="filter = 'completed'"
-            ) Completed
+            ) Выполненные
             .button.button--round.button-default(
               @click="filter = 'all'"
-            ) All
+            ) Все
         .task-list
           .task-item(
             v-for="task in tasksFilter"
@@ -22,9 +22,6 @@
           )
             .ui-card.ui-card--shadow
               .task-item__info
-                .task-item__main-info
-                  span.ui-label.ui-label--light {{ task.whatWatch }}
-                  span Total Time: {{ task.time }}
                 span.button-close(
                   @click="deleteTask(task.id)"
                 )
@@ -49,8 +46,7 @@
                     .button-list
                       .button.button--round.button-default(
                         @click="taskEdit(task.id, task.title, task.description)"
-                      ) Edit
-                      .button.button--round.button-primary Done
+                      ) Изменить
 
     .ui-messageBox__wrapper(
       v-if="editing"
@@ -61,12 +57,12 @@
           span.messageBox-title {{ titleEditing }}
           span.button-close(@click="cancelTaskEdit")
         .ui-messageBox__content
-          p Title
+          p Заголовок
           input(
             type="text"
             v-model='titleEditing'
           )
-          p Description
+          p Описание
           textarea(
             type="text"
             v-model='desrEditing'
@@ -81,7 +77,7 @@
 export default {
   data () {
     return {
-      filter: 'active',
+      filter: 'all',
       editing: false,
       titleEditing: '',
       desrEditing: '',
@@ -166,6 +162,7 @@ export default {
   justify-content space-between
   margin-bottom 20px
   .button-close
+    margin right
     width 20px
     height @width
 
@@ -199,5 +196,8 @@ export default {
     display flex
   .button-light
     margin-right 8px
+
+h1
+  color rgb(0,120,215)
 
 </style>

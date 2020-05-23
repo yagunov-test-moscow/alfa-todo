@@ -3,15 +3,13 @@
   section
     .container
       .auth
-        .auth__banner
-          h1.ui-title-2 Hello banner
         .auth__form
-          span.ui-title-2 Login
+          span.ui-title-2 Войти
           form(@submit.prevent="onSubmit")
             .form-item(:class="{ errorInput: $v.email.$error }")
               input(
                 type="email"
-                placeholder="Email"
+                placeholder="Имейл"
                 v-model="email"
                 :class="{ error: $v.email.$error }"
                 @change="$v.email.$touch()"
@@ -21,7 +19,7 @@
             .form-item(:class="{ errorInput: $v.password.$error }")
               input(
                 type="password"
-                placeholder="Password"
+                placeholder="Пароль"
                 v-model="password"
                 :class="{ error: $v.password.$error }"
                 @change="$v.password.$touch()"
@@ -35,8 +33,8 @@
                 type="submit"
                 :disabled="submitStatus === 'PENDING'"
               )
-                span(v-if="loading") Loading...
-                span(v-else) Login
+                span(v-if="loading") Загрузка...
+                span(v-else) Войти
 
             .buttons-list.buttons-list--info
               p(v-if="submitStatus === 'OK'") Thanks for your submission!
@@ -44,8 +42,8 @@
               p(v-else) {{ submitStatus }}
 
             .buttons-list.buttons-list--info
-              span Need Registration?
-                router-link(to="/registration")  Enter Here
+              span Не зарегистрированны?
+                router-link(to="/registration")  Нажмите сюда
 
 </template>
 
@@ -102,9 +100,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 .auth
   display flex
-.auth__banner,
+  justify-content center
 .auth__form
  width 50%
 
@@ -131,6 +130,12 @@ input
       margin-bottom 0
 
 a
-  color #444ce0
+  color rgb(0,120,215)
+
+.ui-title-2
+  color rgb(0,120,215)
+
+.button.button.button-primary
+  background rgb(0,120,215)
 
 </style>

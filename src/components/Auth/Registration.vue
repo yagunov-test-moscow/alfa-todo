@@ -3,15 +3,13 @@
   section
     .container
       .auth
-        .auth__banner
-          h1.ui-title-2 Hello banner
         .auth__form
-          span.ui-title-2 Registration
+          span.ui-title-2 Регистрация
           form(@submit.prevent="onSubmit")
             .form-item(:class="{ errorInput: $v.email.$error }")
               input(
                 type="email"
-                placeholder="Email"
+                placeholder="Имейл"
                 v-model="email"
                 :class="{ error: $v.email.$error }"
                 @change="$v.email.$touch()"
@@ -21,7 +19,7 @@
             .form-item(:class="{ errorInput: $v.password.$error }")
               input(
                 type="password"
-                placeholder="Password"
+                placeholder="Пароль"
                 v-model="password"
                 :class="{ error: $v.password.$error }"
                 @change="$v.password.$touch()"
@@ -33,7 +31,7 @@
             .form-item(:class="{ errorInput: $v.repeatPassword.$error }")
               input(
                 type="password"
-                placeholder="Repeat your password"
+                placeholder="Повторите пароль"
                 v-model="repeatPassword"
                 :class="{ error: $v.repeatPassword.$error }"
                 @change="$v.repeatPassword.$touch()"
@@ -44,8 +42,8 @@
               button.button.button-primary(
                 type="submit"
               )
-                span(v-if="loading") Loading...
-                span(v-else) Registration
+                span(v-if="loading") Загрузка...
+                span(v-else) Регистрация
 
             .buttons-list.buttons-list--info
               p.typo__p(v-if="submitStatus === 'OK'") Thanks for your submission!
@@ -54,8 +52,8 @@
               //- p.typo__p(v-if="submitStatus === 'PENDING'") Sending...
 
             .buttons-list.buttons-list--info
-              span Do you have account?
-                router-link(to="/login")  Enter Here
+              span Уже есть аккаунт?
+                router-link(to="/login")  Нажми сюда
 
 </template>
 
@@ -120,8 +118,7 @@ export default {
 <style lang="stylus" scoped>
 .auth
   display flex
-  flex-wrap wrap
-.auth__banner,
+  justify-content center
 .auth__form
  width 50%
  @media screen and (max-width: 768px)
@@ -153,6 +150,12 @@ input
       margin-bottom 0
 
 a
-  color #444ce0
+  color rgb(0,120,215)
+
+.ui-title-2
+  color rgb(0,120,215)
+
+.button.button.button-primary
+  background rgb(0,120,215)
 
 </style>
