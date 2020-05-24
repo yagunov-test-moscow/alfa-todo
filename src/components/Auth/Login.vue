@@ -74,7 +74,6 @@ export default {
       if (this.$v.$invalid) {
         this.submitStatus = 'ERROR'
       } else {
-        console.log('Login!')
         const user = {
           email: this.email,
           password: this.password

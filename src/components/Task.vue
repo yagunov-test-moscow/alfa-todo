@@ -31,6 +31,7 @@
                     input.ui-checkbox(
                       type='checkbox'
                       v-model="task.completed"
+                      @click="taskCompleted(task.id, task.completed)"
                       )
                   span.ui-title-3 {{ task.title }}
                 .task-item__body
@@ -85,6 +86,17 @@ export default {
     }
   },
   methods: {
+    taskCompleted (id, completed) {
+      completed ? completed = false : completed = true
+      this.$store.dispatch('completedTask', {
+        id,
+        completed
+      })
+        .then(() => {
+          console.log(completed)
+          this.$store.dispatch('loadTasks')
+        })
+    },
     taskEdit (id, title, description) {
       this.editing = !this.editing
       this.taskId = id
